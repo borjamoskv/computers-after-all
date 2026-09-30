@@ -9,11 +9,14 @@ from scipy.signal import butter, filtfilt
 
 
 def safe_filtfilt(b: np.ndarray, a: np.ndarray, x: np.ndarray, axis: int = -1) -> np.ndarray:
-    """Safe forward-backward filtering with length safeguard against padlen failures."""
-    n_samples = x.shape[axis]
+    """Safe forward-backward filtering with length safeguard and input dtype preservation."""
+    n_samples = x.shape[axis] if x.ndim > 0 else len(x)
     if n_samples < 30:
         return x
-    return filtfilt(b, a, x, axis=axis)
+    filtered = filtfilt(b, a, x, axis=axis)
+    if hasattr(x, "dtype") and filtered.dtype != x.dtype:
+        return filtered.astype(x.dtype)
+    return filtered
 
 
 class LinkwitzRiley4Crossover:
