@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "computers-after-all"
+version = "1.0.0"
+description = "Autonomous DJ System & Reactive YouTube Video Synthesizer (C5-REAL / High Exergy)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Borja", email = "82632764+borjamoskv@users.noreply.github.com" }
+]
+keywords = [
+    "autonomous-dj",
+    "techno",
+    "dsp",
+    "linkwitz-riley",
+    "camelot-wheel",
+    "rekordbox",
+    "youtube-reactive-video",
+    "audio-visualizer",
+    "ebu-r128"
+]
+dependencies = [
+    "numpy>=1.22.0",
+    "scipy>=1.8.0",
+    "soundfile>=0.11.0",
+    "pillow>=9.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "yt-dlp>=2024.0.0"
+]
+
+[project.scripts]
+computers-after-all = "computers_after_all.cli:main"
+caa = "computers_after_all.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["computers_after_all*"]
